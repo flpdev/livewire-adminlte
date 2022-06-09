@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dev', function () {
     return view('development');
 });
 
 Route::get('/teste', App\Http\Livewire\Teste::class)->name('teste');
+Route::get('/home', App\Http\Livewire\Home::class)->name('home');
