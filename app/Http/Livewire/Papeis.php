@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Roles;
 use Illuminate\Validation\Rule;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
@@ -40,7 +39,7 @@ class Papeis extends Component
 
     public function render()
     {
-        $papeis = Roles::where('name', 'like', '%' . $this->pesquisar . '%')->paginate(10);
+        $papeis = Role::where('name', 'like', '%' . $this->pesquisar . '%')->paginate(10);
 
         $dados = [
             'papeis' => $papeis,
@@ -74,7 +73,7 @@ class Papeis extends Component
         $this->clearFields();
     }
 
-    public function show($id)
+    public function show($idPapel)
     {
     }
 
@@ -95,7 +94,7 @@ class Papeis extends Component
     {
         $validado = $this->validate();
         try {
-            $papel = Roles::find($this->idPapel);
+            $papel = Role::find($this->idPapel);
             $papel->update($validado);
             $this->dispatchBrowserEvent('hideModal');
             $this->clearFields();
@@ -105,7 +104,7 @@ class Papeis extends Component
         }
     }
 
-    public function delete($id)
+    public function delete($idPapel)
     {
     }
 

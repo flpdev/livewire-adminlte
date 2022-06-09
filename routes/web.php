@@ -27,3 +27,4 @@ Route::get('/teste', App\Http\Livewire\Teste::class)->name('teste');
 Route::get('/home', App\Http\Livewire\Home::class)->name('home');
 
 Route::get('/papeis', App\Http\Livewire\Papeis::class)->name('papeis');
+Route::get('/permissoes', App\Http\Livewire\Permissoes::class)->name('permissoes');
