@@ -36,6 +36,8 @@ class AdminlteServicePovider extends ServiceProvider
             __DIR__.'\..\..\vendor\almasaeed2010\adminlte\plugins\fontawesome-free' => public_path('\adminlte\plugins\fontawesome-free'),
             //  - jquery
             __DIR__.'\..\..\vendor\almasaeed2010\adminlte\plugins\jquery' => public_path('\adminlte\plugins\jquery'),
+            //  - icheck-bootstrap
+            __DIR__.'\..\..\vendor\almasaeed2010\adminlte\plugins\icheck-bootstrap' => public_path('\adminlte\plugins\icheck-bootstrap'),
 
 
         ]);

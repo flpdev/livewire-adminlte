@@ -13,16 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', App\Http\Livewire\Home::class)->name('index');
 
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dev', function () {
-    return view('development');
+    return view('auth.passwords.confirm');
 });
 
 Route::get('/teste', App\Http\Livewire\Teste::class)->name('teste');
