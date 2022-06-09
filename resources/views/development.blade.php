@@ -11,10 +11,10 @@
     @livewireStyles
 
 </head>
-<body>
+<body class="sidebar-mini vsc-initialized" style="height: auto;">
 
 
-    
+    @livewire('sidebar')
     
 
     <script src="{{asset('js/app.js')}}"></script>

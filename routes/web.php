@@ -24,3 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dev', function () {
     return view('development');
 });
+
+Route::get('/teste', App\Http\Livewire\Teste::class)->name('teste');
