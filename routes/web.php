@@ -25,3 +25,5 @@ Route::get('/dev', function () {
 
 Route::get('/teste', App\Http\Livewire\Teste::class)->name('teste');
 Route::get('/home', App\Http\Livewire\Home::class)->name('home');
+
+Route::get('/papeis', App\Http\Livewire\Papeis::class)->name('papeis');

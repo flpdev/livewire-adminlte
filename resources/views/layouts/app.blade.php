@@ -54,15 +54,13 @@
 
         </div>
 
-
-
         @livewire('partials.footer')
-
 
     </div>
 
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.js')}}"></script>    
     <script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
     @yield('scripts')
     @livewireScripts

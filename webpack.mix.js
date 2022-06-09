@@ -11,9 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
- @import 'vendor\almasaeed2010\adminlte\dist\css\adminlte.min.css';
- @import 'vendor\almasaeed2010\adminlte\dist\js\adminlte.min.js';
-
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
