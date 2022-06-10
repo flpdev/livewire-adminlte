@@ -3,14 +3,14 @@
 
 <div>
     @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
-    <div class="card card-default">
+    <div class="card card-primary card-outline">
         <div class="card-body">
             <div class="pb-3 float-left">
                 <button wire:click="create()" class="btn btn-primary">
@@ -40,9 +40,9 @@
                         <td>{{$papel->name}}</td>
                         <td>{{$papel->description}}</td>
                         <td>
-                            <button wire:click="show({{$papel->id}})" class="btn btn-sm btn-primary">
-                                <i class="fas fa-eye"></i>
-                                Visualizar
+                            <button wire:click="permissions({{$papel->id}})" class="btn btn-sm btn-primary">
+                                <i class="fas fa-key"></i>
+                                Permissões
                             </button>
                             <button wire:click="edit({{$papel->id}})" class="btn btn-sm btn-warning">
                                 <i class="fas fa-pen"></i>
@@ -70,6 +70,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Modal -->

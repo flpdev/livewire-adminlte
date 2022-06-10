@@ -14,6 +14,7 @@ class Permissoes extends Component
     public $idPermissao, $name, $description, $pesquisar = '', $actionForm, $tituloModal;
     protected $paginationTheme = 'bootstrap';
     protected $messages;
+    public $papeisPermissoes = [];
 
     protected function rules()
     {
@@ -33,13 +34,16 @@ class Permissoes extends Component
 
     public function render()
     {
-        $permissoes = Permission::where('name', 'like', '%' . $this->pesquisar . '%')->paginate(10);
+        $permissoes = Permission::orWhere('name', 'like', '%' . $this->pesquisar . '%')
+                                ->orWhere('description', 'like', '%' . $this->pesquisar . '%')
+                                ->paginate(10);
 
         $dados = [
             'permissoes' => $permissoes,
             'tituloModal' => $this->tituloModal,
             'idPermissao' => $this->idPermissao,
             'actionForm' => $this->actionForm,
+            'papeisPermissoes' => $this->papeisPermissoes,
         ];
 
         return view('livewire.permissoes')->with($dados);
@@ -69,6 +73,10 @@ class Permissoes extends Component
 
     public function show($idPermissao){
 
+        $this->papeisPermissoes = Permission::find($idPermissao)->roles;
+
+        $this->tituloModal = 'Papeis que utilizam esta permissão';
+        $this->dispatchBrowserEvent('showPapeisModal');
     }
 
     public function edit($idPermissao){
@@ -96,6 +104,11 @@ class Permissoes extends Component
     {
         $this->name = null;
         $this->description = null;
+    }
+
+    public function permissions($idPapel)
+    {
+        return redirect()->route('papeis-permissoes', $idPapel);
     }
 
 }

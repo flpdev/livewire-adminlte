@@ -39,7 +39,9 @@ class Papeis extends Component
 
     public function render()
     {
-        $papeis = Role::where('name', 'like', '%' . $this->pesquisar . '%')->paginate(10);
+        $papeis = Role::orWhere('name', 'like', '%' . $this->pesquisar . '%')
+                        ->orWhere('description', 'like', '%' . $this->pesquisar . '%')
+                        ->paginate(10);
 
         $dados = [
             'papeis' => $papeis,
@@ -73,8 +75,9 @@ class Papeis extends Component
         $this->clearFields();
     }
 
-    public function show($idPapel)
+    public function permissions($idPapel)
     {
+        return redirect()->route('papeis-permissoes', $idPapel);
     }
 
     public function edit($idPapel)
@@ -100,7 +103,6 @@ class Papeis extends Component
             $this->clearFields();
             session()->flash('success', 'Papel atualizado com sucesso!');
         } catch (\Throwable $th) {
-        
         }
     }
 

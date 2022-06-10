@@ -3,12 +3,12 @@
 
 <div>
     @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
     <div class="card card-default">
         <div class="card-body">
@@ -41,8 +41,8 @@
                         <td>{{$permissao->description}}</td>
                         <td>
                             <button wire:click="show({{$permissao->id}})" class="btn btn-sm btn-primary">
-                                <i class="fas fa-eye"></i>
-                                Visualizar
+                                <i class="fas fa-list"></i>
+                                Papeis
                             </button>
                             <button wire:click="edit({{$permissao->id}})" class="btn btn-sm btn-warning">
                                 <i class="fas fa-pen"></i>
@@ -109,6 +109,42 @@
         </div>
     </div>
 
+    <!-- Modal Papeis -->
+    <div wire:ignore.self id="papeisModal" tabindex="-1" aria-labelledby="papeisModalLabel" class="modal fade show"
+        aria-modal="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="papeisModalLabel">{{$tituloModal}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    @foreach($papeisPermissoes as $papel)
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item border-bottom">
+                            {{$papel->name}}
+                            <div class="float-right">
+                                <button wire:click="removePapel({{$papel->id}})" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-list"></i>
+                                    Acessar Papel
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                    @endforeach
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
 
         window.addEventListener('showModal', event => {
@@ -116,6 +152,9 @@
         });
         window.addEventListener('hideModal', event => {
             $('#actionModal').modal('hide');
+        });
+        window.addEventListener('showPapeisModal', event => {
+            $('#papeisModal').modal('show');
         });
 
     </script>
