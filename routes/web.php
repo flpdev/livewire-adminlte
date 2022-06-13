@@ -29,3 +29,4 @@ Route::get('/home', App\Http\Livewire\Home::class)->name('home');
 Route::get('/papeis', App\Http\Livewire\Papeis::class)->name('papeis');
 Route::get('/permissoes', App\Http\Livewire\Permissoes::class)->name('permissoes');
 Route::get('/papeis-permissoes/{idPapel}', App\Http\Livewire\PapeisPermissoes::class)->name('papeis-permissoes');
+Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');

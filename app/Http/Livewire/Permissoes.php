@@ -111,4 +111,9 @@ class Permissoes extends Component
         return redirect()->route('papeis-permissoes', $idPapel);
     }
 
+    public function papelPermissao($idPapel)
+    {
+        return redirect()->route('papeis-permissoes', $idPapel);
+    }
+
 }
