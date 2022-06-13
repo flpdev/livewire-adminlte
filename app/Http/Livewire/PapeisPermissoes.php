@@ -7,8 +7,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Livewire\WithPagination;
 
-
-
 class PapeisPermissoes extends Component
 {
     use WithPagination;
