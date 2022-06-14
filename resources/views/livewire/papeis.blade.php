@@ -13,10 +13,12 @@
     <div class="card card-primary card-outline">
         <div class="card-body">
             <div class="pb-3 float-left">
+                @can('papel-create')
                 <button wire:click="create()" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
                     Cadastrar Novo <b>Papel</b>
                 </button>
+                @endcan
             </div>
             <div class="float-right">
                 <input wire:model="pesquisar" type="text" name="pesquisar" id="pesquisar" class="form-control"
