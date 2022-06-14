@@ -73,7 +73,7 @@
                                         @if($sub_page->page_superior_id == $page->id)
                                             @can($sub_page->permissao)
                                             <li class="nav-item">
-                                                <a href="@if(!empty($sub_page->rota)  || !$sub_page->isMenuPai())  {{ route($page->rota) }}  @endif" class="nav-link">
+                                                <a href="@if(!empty($sub_page->rota))  {{ route($sub_page->rota) }}  @endif" class="nav-link">
                                                     <i class="{{$sub_page->icon}}"></i>
                                                     <p>{{$sub_page->titulo}}</p>
                                                 </a>
@@ -100,7 +100,7 @@
                                         @if($sub_page->page_superior_id == $page->id)
                                             @can($sub_page->permissao)
                                             <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="@if(!empty($sub_page->rota))  {{ route($sub_page->rota) }}  @endif" class="nav-link">
                                                     <i class="{{$sub_page->icon}}"></i>
                                                     <p>{{$sub_page->titulo}}</p>
                                                 </a>
