@@ -28,7 +28,6 @@ class Paginas extends Component
             'rota.max' => 'A rota da página deve ter no máximo 100 caracteres',
             'icon.required' => 'O campo ícone é obrigatório',
             'icon.max' => 'O ícone da página deve ter no máximo 100 caracteres',
-            'permissao.required' => 'O campo permissão é obrigatório',
             'permissao.max' => 'A permissão da página deve ter no máximo 100 caracteres',
             'situacao.required' => 'O campo situação é obrigatório',
             'situacao.max' => 'A situação da página deve ter no máximo 100 caracteres',
@@ -39,7 +38,7 @@ class Paginas extends Component
             'descricao' => 'required|string|max:100',
             'rota' => 'required|string|max:100',
             'icon' => 'required|string|max:100',
-            'permissao' => 'required|string|max:100',
+            'permissao' => 'string|max:100',
             'situacao' => 'required|string|max:100',
         ];
     }
@@ -69,7 +68,18 @@ class Paginas extends Component
     }
 
     public function store(){
-        
+        $validado = $this->validate();
+
+        try {
+            Pages::create($validado);
+            $this->emit('success', 'Página cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            $this->emit('error', 'Erro ao cadastrar página!');
+        }
+
+        $this->clearFields();
+        $this->dispatchBrowserEvent('hideModal');
+
     }
 
     public function edit($id){
@@ -82,18 +92,25 @@ class Paginas extends Component
     }
 
     public function update(){
-        $pagina = Pages::find($this->idPage);
-        $pagina->titulo = $this->titulo;
-        $pagina->descricao = $this->descricao;
-        $pagina->rota = $this->rota;
-        $pagina->icon = $this->icon;
-        $pagina->permissao = $this->permissao;
-        $pagina->situacao = $this->situacao;
-        $pagina->save();
+
+        try {
+
+            $validado = $this->validate();
+            Pages::find($this->idPage)->update($validado);
+            $this->dispatchBrowserEvent('hideModal');
+            $this->clearFields();
+            session()->flash('success', 'Página atualizada com sucesso!');
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Erro ao atualizar página!'.$e->getMessage());
+
+        }
+
         $this->clearFields();
         $this->dispatchBrowserEvent('hideModal');
     }
-    
+
 
     public function clearFields(){
         $this->titulo = '';

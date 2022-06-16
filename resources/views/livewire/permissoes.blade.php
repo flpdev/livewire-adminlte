@@ -10,61 +10,78 @@
         </button>
     </div>
     @endif
-    <div class="card card-default">
+    <div class="card card-primary card-outline">
         <div class="card-body">
-            <div class="pb-3 float-left">
-                <button wire:click="create()" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Nova <b>Permissão</b>
-                </button>
+            <div class="container-fluid mb-1">
+                <div class="row">
+                    <div class="col-md m-1">
+                        <button wire:click="create()" class="btn btn-primary float-left col-sm-12 col-md-6">
+                            <i class="fas fa-plus"></i>
+                            Cadastrar Nova <b>Permissão</b>
+                        </button>
+                    </div>
+                    <div class="col-md m-1">
+                        <input wire:model="pesquisar" type="text" name="pesquisar" id="pesquisar"
+                            class="form-control col-md-6 float-right" placeholder="Pesquisar Nome">
+                    </div>
+                </div>
             </div>
-            <div class="float-right">
-                <input wire:model="pesquisar" type="text" name="pesquisar" id="pesquisar" class="form-control"
-                    placeholder="Pesquisar Nome">
+            <div class="table-responsive">
+                <table class="table table-hover" id="tabela">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($permissoes) > 0)
+
+                        @foreach ($permissoes as $key => $permissao)
+                        <tr>
+                            <td>{{$key+=1}}</td>
+                            <td>{{$permissao->name}}</td>
+                            <td>{{$permissao->description}}</td>
+                            <td>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button wire:click="show({{$permissao->id}})"
+                                                class="btn btn-sm btn-primary col">
+                                                <i class="fas fa-list"></i>
+                                                Papeis
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button wire:click="edit({{$permissao->id}})"
+                                                class="btn btn-sm btn-warning col">
+                                                <i class="fas fa-pen"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button wire:click="delete({{$permissao->id}})"
+                                                class="btn btn-sm btn-danger col">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </button>
+                                        </div>
+                            </td>
+                        </tr>
+                        @endforeach
+
+                        @else
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Nenhum registro encontrado.
+                            </td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-hover" id="tabela">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(count($permissoes) > 0)
-
-                    @foreach ($permissoes as $key => $permissao)
-                    <tr>
-                        <td>{{$key+=1}}</td>
-                        <td>{{$permissao->name}}</td>
-                        <td>{{$permissao->description}}</td>
-                        <td>
-                            <button wire:click="show({{$permissao->id}})" class="btn btn-sm btn-primary">
-                                <i class="fas fa-list"></i>
-                                Papeis
-                            </button>
-                            <button wire:click="edit({{$permissao->id}})" class="btn btn-sm btn-warning">
-                                <i class="fas fa-pen"></i>
-                                Editar
-                            </button>
-                            <button wire:click="delete({{$permissao->id}})" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Excluir
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                    @else
-                    <tr>
-                        <td colspan="4" class="text-center">
-                            Nenhum registro encontrado.
-                        </td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
             <div class="pt-3 float-right">
                 {{ $permissoes->links() }}
             </div>
@@ -125,7 +142,8 @@
                         <li class="list-group-item border-bottom">
                             {{$papel->name}}
                             <div class="float-right">
-                                <button wire:click="papelPermissao({{$papel->id}})" class="btn btn-sm btn-outline-primary">
+                                <button wire:click="papelPermissao({{$papel->id}})"
+                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-list"></i>
                                     Acessar Papel
                                 </button>

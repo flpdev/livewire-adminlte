@@ -12,61 +12,80 @@
     @endif
     <div class="card card-primary card-outline">
         <div class="card-body">
-            <div class="pb-3 float-left">
-                @can('papel-create')
-                <button wire:click="create()" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Novo <b>Papel</b>
-                </button>
-                @endcan
+            <div class="container-fluid mb-1">
+                <div class="row">
+                    <div class="col-md m-1">
+                        <button wire:click="create()" class="btn btn-primary float-left col-sm-12 col-md-6">
+                            <i class="fas fa-plus"></i>
+                            Cadastrar Novo <b>Papel</b>
+                        </button>
+                    </div>
+                    <div class="col-md m-1">
+                        <input wire:model="pesquisar" type="text" name="pesquisar" id="pesquisar"
+                            class="form-control col-md-6 float-right" placeholder="Pesquisar Nome">
+                    </div>
+                </div>
             </div>
-            <div class="float-right">
-                <input wire:model="pesquisar" type="text" name="pesquisar" id="pesquisar" class="form-control"
-                    placeholder="Pesquisar Nome">
+            <div class="table-responsive">
+                <table class="table table-hover" id="tabela">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col" class="text-center" style="width: 25%;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($papeis) > 0)
+
+                        @foreach ($papeis as $key => $papel)
+                        <tr>
+                            <td>{{$key+=1}}</td>
+                            <td>{{$papel->name}}</td>
+                            <td>{{$papel->description}}</td>
+                            <td>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button wire:click="permissions({{$papel->id}})"
+                                                class="btn btn-sm btn-primary col">
+                                                <i class="fas fa-key"></i>
+                                                Permissões
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button wire:click="edit({{$papel->id}})"
+                                                class="btn btn-sm btn-warning col">
+                                                <i class="fas fa-pen"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button wire:click="delete({{$papel->id}})"
+                                                class="btn btn-sm btn-danger col">
+                                                <i class="fas fa-trash"></i>
+                                                Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+
+                        @else
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Nenhum registro encontrado.
+                            </td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-hover" id="tabela">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(count($papeis) > 0)
 
-                    @foreach ($papeis as $key => $papel)
-                    <tr>
-                        <td>{{$key+=1}}</td>
-                        <td>{{$papel->name}}</td>
-                        <td>{{$papel->description}}</td>
-                        <td>
-                            <button wire:click="permissions({{$papel->id}})" class="btn btn-sm btn-primary">
-                                <i class="fas fa-key"></i>
-                                Permissões
-                            </button>
-                            <button wire:click="edit({{$papel->id}})" class="btn btn-sm btn-warning">
-                                <i class="fas fa-pen"></i>
-                                Editar
-                            </button>
-                            <button wire:click="delete({{$papel->id}})" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Excluir
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
 
-                    @else
-                    <tr>
-                        <td colspan="4" class="text-center">
-                            Nenhum registro encontrado.
-                        </td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
             <div class="pt-3 float-right">
                 {{ $papeis->links() }}
             </div>
