@@ -43,6 +43,7 @@ class PapeisPermissoes extends Component
         if(sizeOf($this->permissoesHabilitadasTela) > 0){
             $this->papel->syncPermissions($this->permissoesHabilitadasTela);
         }
+        $this->emit('refreshSidebar');
     }
 
 }

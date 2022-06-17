@@ -114,13 +114,32 @@
             <div class="modal-body">
                 <form wire:submit.prevent="{{$actionForm}}">
                     <div class="form-group">
-                        <label for="titulo" class="control-label">Título</label>
-                        <input wire:model="idPagina" type="hidden" name="idPagina" id="idPagina">
-                        <input wire:model="titulo" type="text" name="titulo" id="titulo" class="form-control"
-                            maxlength="15">
-                        @error('titulo')
-                        <span class="text-danger" style="font-size: 11.5px;">{{$message}}</span>
-                        @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="titulo" class="control-label">Título</label>
+                                <input wire:model="titulo" type="text" name="titulo" id="titulo" class="form-control"
+                                    maxlength="15">
+                                @error('titulo')
+                                <span class="text-danger" style="font-size: 11.5px;">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="paginaSuperiorId" class="control-label">Menu Superior</label>
+                                <select wire:model="paginaSuperiorId" type="text" name="page_superior_id" id="page_superior_id" class="form-select">
+                                        <option value="0" selected>Menu Principal</option>
+                                        @foreach($paginas as $pagina)
+                                            @if(empty($pagina->page_superior_id))
+                                                @if($pagina->id != $idPagina)
+                                                    <option value="{{$pagina->id}}">{{$pagina->titulo}}</option>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                </select>
+                                @error('page_superior_id')
+                                <span class="text-danger" style="font-size: 11.5px;">{{$message}}</span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="descricao" class="control-label">Descrição</label>
@@ -141,7 +160,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="situacao" class="control-label">Situação</label>
-                                <select wire:model="situacao" type="text" name="situacao" id="situacao" class="form-select">
+                                <select wire:model="situacao" type="text" name="situacao" id="situacao"
+                                    class="form-select">
                                     <option value="" selected disabled>Selecione</option>
                                     <option value="1">Ativo</option>
                                     <option value="0">Inativo</option>
@@ -165,7 +185,8 @@
                                 <label for="icon" class="control-label">Ícone</label>
                                 <input wire:model="icon" type="text" name="icon" id="icon" class="form-control">
                                 <span class="text-primary" style="font-size: 11.5px;">
-                                    <a href="https://fontawesome.com/v5/search?m=free" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://fontawesome.com/v5/search?m=free" target="_blank"
+                                        rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
                                         Font Awesome
                                     </a>

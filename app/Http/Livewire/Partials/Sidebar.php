@@ -7,6 +7,11 @@ use App\Models\Pages;
 
 class Sidebar extends Component
 {
+
+    protected $listeners = [
+        'refreshSidebar' => 'render',
+    ];
+
     public function render()
     {
         $dados = [

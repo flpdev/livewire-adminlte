@@ -28,7 +28,7 @@
 
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Pesquisar"
                         aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-sidebar">
@@ -67,22 +67,24 @@
                                             <i class="fas fa-angle-left right"></i>
                                         @endif
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                    <!-- SUBMENU -->
-                                    @foreach($pages as $sub_page)
-                                        @if($sub_page->page_superior_id == $page->id)
-                                            @can($sub_page->permissao)
-                                            <li class="nav-item">
-                                                <a href="@if(!empty($sub_page->rota))  {{ route($sub_page->rota) }}  @endif" class="nav-link">
-                                                    <i class="{{$sub_page->icon}}"></i>
-                                                    <p>{{$sub_page->titulo}}</p>
-                                                </a>
-                                            </li>
-                                            @endcan
-                                        @endif
-                                    @endforeach
-                                    <!-- END SUBMENU -->
-                                    </ul>
+                                    @if($page->isMenuPai())
+                                        <ul class="nav nav-treeview">
+                                        <!-- SUBMENU -->
+                                        @foreach($pages as $sub_page)
+                                            @if($sub_page->page_superior_id == $page->id)
+                                                @can($sub_page->permissao)
+                                                <li class="nav-item">
+                                                    <a href="@if(!empty($sub_page->rota))  {{ route($sub_page->rota) }}  @endif" class="nav-link">
+                                                        <i class="{{$sub_page->icon}}"></i>
+                                                        <p>{{$sub_page->titulo}}</p>
+                                                    </a>
+                                                </li>
+                                                @endcan
+                                            @endif
+                                        @endforeach
+                                        <!-- END SUBMENU -->
+                                        </ul>
+                                    @endif
                                 </li>
                             @endcan
                         @else
@@ -94,6 +96,7 @@
                                         <i class="fas fa-angle-left right"></i>
                                     @endif
                                 </a>
+                                @if($page->isMenuPai())
                                 <ul class="nav nav-treeview">
                                     <!-- SUBMENU -->
                                     @foreach($pages as $sub_page)
@@ -110,6 +113,7 @@
                                     @endforeach
                                     <!-- END SUBMENU -->
                                 </ul>
+                                @endif
                             </li>
                         @endif
                     @endforeach
