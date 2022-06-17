@@ -168,4 +168,10 @@ class Usuarios extends Component
         $this->papeisUsuario = $usuario->roles;
         $this->papeisRestantes = Role::all()->diff($this->papeisUsuario);
     }
+
+    public function novaSenha($idUsuario){
+        dd('ENVIAR NOVA SENHA POR E-MAIL');
+    }
+
+    
 }

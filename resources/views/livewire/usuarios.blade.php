@@ -48,9 +48,9 @@
                                 <i class="fas fa-pen"></i>
                                 Editar
                             </button>
-                            <button wire:click="delete({{$usuario->id}})" class="btn btn-sm btn-danger">
-                                <i class="fas fa-key"></i>
-                                Alterar Senha
+                            <button wire:click="novaSenha({{$usuario->id}})" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-envelope"></i>
+                                Enviar Nova Senha
                             </button>
                         </td>
                     </tr>

@@ -17,7 +17,6 @@ class Sidebar extends Component
         $dados = [
             'pages' => Pages::where('situacao', '=', 1)->get(),
         ];
-
         return view('livewire.partials.sidebar')->with($dados);
     }
 }

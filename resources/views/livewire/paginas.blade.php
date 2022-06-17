@@ -135,7 +135,7 @@
                                             @endif
                                         @endforeach
                                 </select>
-                                @error('page_superior_id')
+                                @error('paginaSuperiorId')
                                 <span class="text-danger" style="font-size: 11.5px;">{{$message}}</span>
                                 @enderror
                             </div>

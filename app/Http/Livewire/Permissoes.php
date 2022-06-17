@@ -80,11 +80,18 @@ class Permissoes extends Component
     }
 
     public function edit($idPermissao){
-
+        $this->clearFields();
+        $permissao = Permission::find($idPermissao);
+        $this->idPermissao = $permissao->id;
+        $this->name = $permissao->name;
+        $this->description = $permissao->description;
+        $this->actionForm = 'update';
+        $this->dispatchBrowserEvent('showModal');
+        $this->tituloModal = 'Editar Permissão';        
     }
 
     public function update(){
-        $validado = $this->validado();
+        $validado = $this->validate();
         try {
             $permissao = Permission::find($this->idPermissao);
             $permissao->update($validado);

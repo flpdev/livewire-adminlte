@@ -21,7 +21,7 @@ class CreatePagesTable extends Migration
             $table->string('icon')->nullable();
             $table->string('permissao')->nullable();
             $table->integer('situacao');
-            $table->integer('page_superior_id')->nullable();
+            $table->integer('page_superior_id')->nullable()->default(0);
             $table->timestamps();
         });
     }

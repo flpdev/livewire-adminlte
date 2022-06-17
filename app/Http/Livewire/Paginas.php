@@ -25,7 +25,6 @@ class Paginas extends Component
             'titulo.max' => 'O título da página deve ter no máximo 100 caracteres',
             'descricao.required' => 'O campo descrição é obrigatório',
             'descricao.max' => 'A descrição da página deve ter no máximo 100 caracteres',
-            'rota.required' => 'O campo rota é obrigatório',
             'rota.max' => 'A rota da página deve ter no máximo 100 caracteres',
             'icon.required' => 'O campo ícone é obrigatório',
             'icon.max' => 'O ícone da página deve ter no máximo 100 caracteres',
@@ -38,7 +37,7 @@ class Paginas extends Component
         return [
             'titulo' => 'required|max:100',
             'descricao' => 'required|max:100',
-            'rota' => 'required|max:100',
+            'rota' => 'max:100',
             'icon' => 'required|max:100',
             'permissao' => 'max:100',
             'situacao' => 'required',
@@ -74,7 +73,8 @@ class Paginas extends Component
     public function store()
     {
         $validado = $this->validate();
-
+        $validado['page_superior_id'] = $validado['paginaSuperiorId'];
+        
         try {
             Pages::create($validado);
             $this->emit('success', 'Página cadastrada com sucesso!');
