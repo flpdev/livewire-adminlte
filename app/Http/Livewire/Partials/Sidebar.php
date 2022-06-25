@@ -12,8 +12,12 @@ class Sidebar extends Component
         'refreshSidebar' => 'render',
     ];
 
+    public $appName;
+
     public function render()
     {
+        $this->appName = env('APP_NAME');
+        
         $dados = [
             'pages' => Pages::where('situacao', '=', 1)->get(),
         ];

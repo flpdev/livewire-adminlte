@@ -19,10 +19,13 @@ Auth::routes([
     'verify' => false
 ]);
 
-Route::get('/', App\Http\Livewire\Home::class)->middleware('auth')->name('index');
-Route::get('/home', App\Http\Livewire\Home::class)->middleware('auth')->name('home');
-Route::get('/papeis', App\Http\Livewire\Papeis::class)->middleware('auth')->name('papeis');
-Route::get('/permissoes', App\Http\Livewire\Permissoes::class)->middleware('auth')->name('permissoes');
-Route::get('/papeis-permissoes/{idPapel}', App\Http\Livewire\PapeisPermissoes::class)->middleware('auth')->name('papeis-permissoes');
-Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->middleware('auth')->name('usuarios');
-Route::get('/paginas', App\Http\Livewire\Paginas::class)->middleware('auth')->name('paginas');
+Route::middleware('auth')->group(function(){
+    Route::get('/', App\Http\Livewire\Home::class)->name('index');
+    Route::get('/home', App\Http\Livewire\Home::class)->name('home');
+    Route::get('/papeis', App\Http\Livewire\Papeis::class)->name('papeis');
+    Route::get('/permissoes', App\Http\Livewire\Permissoes::class)->name('permissoes');
+    Route::get('/papeis-permissoes/{idPapel}', App\Http\Livewire\PapeisPermissoes::class)->name('papeis-permissoes');
+    Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');
+    Route::get('/paginas', App\Http\Livewire\Paginas::class)->name('paginas');
+    Route::get('/perfil', App\Http\Livewire\Perfil::class)->name('perfil');
+});
