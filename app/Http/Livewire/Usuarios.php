@@ -7,7 +7,7 @@ use Livewire\WithPagination;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\Gate;
 
 class Usuarios extends Component
 {
@@ -48,6 +48,7 @@ class Usuarios extends Component
 
     public function render()
     {
+        Gate::authorize('usuarios-index');
         $this->usuarios = User::where('admin', '!=', 1)
             ->orWhere('name', 'like', '%' . $this->pesquisar . '%')
             ->orWhere('email', 'like', '%' . $this->pesquisar . '%')
@@ -169,9 +170,8 @@ class Usuarios extends Component
         $this->papeisRestantes = Role::all()->diff($this->papeisUsuario);
     }
 
-    public function novaSenha($idUsuario){
+    public function novaSenha($idUsuario)
+    {
         dd('ENVIAR NOVA SENHA POR E-MAIL');
     }
-
-    
 }
